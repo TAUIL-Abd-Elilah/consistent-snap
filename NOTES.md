@@ -99,3 +99,64 @@ exact order-preserving one-to-one alignment (DP); two passes (raw, then around a
   25.7 %. So consistent vs naive: same recall, about half the hops and a third fewer duplicates; Cm trades 12 points of
   recall (64 -> 52 %) for no duplicates.
   N native spacing: within_2 61.8 %, adjacent 66.1 %, hops 735,211, duplicate 26.2 % (all scoring runs now finished).
+
+- Published 19 Nov ~10:57 UTC: this repo, commit 1c7e5d9, release v1 (fits + C/Cm meshes).
+
+## v3: label_snap.py (sheet-graph winding labels), bars fixed 19 Nov 2026 14:19 UTC (date -u), before any code was run
+- Why: Cm passes, but each human wrap still switches fitted winding as often as with the raw fit (modal share flat;
+  band-2 hop rate up). Cause: the per-ray alignment picks the sheet nearest the fitted winding, so where the fit drifts
+  across sheets the snapped winding steps to the next sheet.
+- Method: sheet nodes = predicted-sheet runs on every ray of every slice (as in v1). Link nodes of neighbouring rays
+  and neighbouring slices by the same exact order-preserving one-to-one alignment (tight tolerance). Union-find with
+  integer label potentials, best links first; the label jump across a link is round(phi(v) - phi(u)), phi = the fit's
+  fractional winding id interpolated along the ray (0 except at the fit's winding seam). A link is refused if it would
+  break the radial order of labels among nearby sheets on either ray. Each sheet component gets ONE integer offset to
+  the fit (median of phi - potential), so a sheet keeps one winding label however far the fit drifts. Per ray,
+  labels that are not strictly increasing outward are dropped. Fitted winding w moves to the sheet labelled w on its
+  ray if within a reach of 1.5 local pitches; everything else is a hole (as in Cm).
+- Parameters are set on the smoke slab z 3560-3680 from CT/prediction/fit views and truth-free counts only (no
+  wraps shown), then frozen in this file before the first human-wrap score.
+- Arm U = label_snap on novA1 (z 3200-4200), densify 2; duplicate share at native spacing, same scorer and tools.
+  Bars (each against the same fit's raw arm A and its Cm):
+  U mean per-wrap modal share >= Cm + 0.03; U hop rate <= 0.75 x Cm hop rate;
+  U within_2 >= A + 15 points; U duplicate share (native) <= A; U adjacent-exact >= A - 2 points.
+  Replication with the same frozen parameters on novA2 and b2A1 is required before any claim; a fit that fails any
+  bar is reported as a failure.
+- Development (smoke slab z 3560-3680, truth-free only; no wraps shown or scored), 19 Nov 14:20-14:27 UTC:
+  first run without a component check: components crept across sheets (a component spanning radius 319-1116 with
+  labels -2..3, phi - label spread +-6), only 14 % of fit nodes moved. Added --comp-tol: a merge is refused if the two
+  components' mean (phi - label) differ by more than comp-tol after the label shift. With 0.4: dev spread within the
+  largest components +-0.5, 32 % of in-band fit nodes moved (Cm on the same slab: 44 %), jump share (2nd difference
+  > 10 vx) in-slice 3.2 % / z 2.3 % (Cm 4.7 / 4.2), duplicate share native 0.66 % (Cm 2.3 %). CT view
+  (local view, not in the repo): U lines follow sheets with fewer zigzags; steps remain in the dense lower region.
+  Sweep (phi-tol, comp-tol) = (0.2,0.4) (0.35,0.6) (0.2,0.6) (0.35,0.3): more coverage costs more jumps; rule set
+  before the sweep: most moved nodes with jump share <= 3.5 % both axes and duplicate <= 1 % -> (0.35, 0.4).
+- FROZEN 19 Nov 14:27 UTC (date -u), before any human-wrap score of U: label_snap.py defaults (dz 4, rays 2048, step 0.5,
+  thr 127, densify 2, link-sigma 0.15, link-dmax 0.35, phi-tol 0.35, comp-tol 0.4, win 3, min-comp 500, reach 1.5),
+  same bbox and umbilicus per band as v1. Bars as fixed at 14:19 UTC above.
+- U runs (19 Nov ~14:30 UTC, ~100 s each): moved 2.76 M / 2.80 M / 2.82 M of 7.84 / 8.11 / 8.14 M in-band nodes
+  (35 %; Cm 43 %). Truth-free: duplicate share at native spacing U 1.19 % (novA1), 1.16 % (novA2), 1.08 % (b2A1),
+  all below A (3.6 / 3.5 / 2.29 %) -> duplicate bar PASS on all three (band 2 included, where Cm failed). Area
+  186 / 189 / 183 cm2 (scorer's measure). Jump share novA1 full band: U 5.2 % in-slice / 3.8 % z, Cm 5.6 / 4.8.
+  Human-wrap scores running (started ~14:32 UTC).
+
+### v3 U human-wrap scores (scorers finished ~16:18 UTC 19 Nov 2026, date -u)
+
+| | seed 1 | seed 2 | band 2 |
+|---|---|---|---|
+| within 2, A -> U (CI) | 31.3 -> 45.2 (+13.8, +11.2..+16.6) | 31.5 -> 46.5 (+14.97, +12.4..+17.8) | 30.6 -> 45.8 (+15.1, +12.4..+18.1) |
+| within 4 | 60.4 -> 62.7 | 61.1 -> 64.5 | 60.3 -> 64.4 |
+| adjacent exact | 63.9 -> 58.0 | 64.0 -> 59.3 | 67.3 -> 57.3 |
+| same-winding pairs | 17.9 -> 20.3 | 17.8 -> 19.9 | 17.8 -> 21.2 |
+| hop rate (Cm) | 0.0109 (0.0206) | 0.0109 (0.0205) | 0.0123 (0.0206) |
+| modal share (Cm) | 0.178 (0.159) | 0.178 (0.165) | 0.147 (0.127) |
+| duplicate native vs A | 1.19 vs 3.6 | 1.16 vs 3.5 | 1.08 vs 2.29 |
+
+Bars: modal >= Cm + 0.03 FAIL x3 (+0.019, +0.013, +0.020); hop rate <= 0.75 Cm PASS x3 (0.53, 0.53, 0.60 of Cm);
+within_2 >= A + 15 FAIL seed 1 (+13.8), FAIL seed 2 (+14.97), pass band 2 (+15.1); duplicate PASS x3;
+adjacent >= A - 2 FAIL x3 (-5.9, -4.7, -10.0).
+**Verdict: U FAILS its pre-registered bars. Kept in experiments/ as a reported failure; Cm (v1) stays the released arm.**
+Reading: winding hops halve and stacking drops to ~1 %, so the labels do hold sheets together, but whole components
+carry a wrong integer offset (base = round(median(phi - label))): neighbouring wraps then land on the same or
+non-adjacent windings (same-winding pairs up, adjacent exact down 5-10 points). The stair-step became an offset error
+between components, not a fix.

@@ -1,0 +1,13 @@
+117 windings, 250 slices x 2048 rays
+nodes slice 1/250 z 3200: 1 s
+nodes slice 51/250 z 3400: 9 s
+nodes slice 101/250 z 3600: 16 s
+nodes slice 151/250 z 3800: 24 s
+nodes slice 201/250 z 4000: 32 s
+35209773 sheet nodes, 58474697 fitted crossings, phi finite 0.939: 40 s
+68470333 links (ray 34419520, slice 34050813): 50 s
+union {'used': 63920507, 'merged': 32847784, 'cycle_ok': 28317796, 'cycle_bad': 61636, 'refused_order': 155480, 'skipped_phi': 4549826, 'refused_dev': 2537811} 79 s
+components {'components_kept': 4588, 'nodes_in_kept': 30083080, 'share_in_kept': 0.8544, 'largest': [2103427, 1456648, 928326, 780696, 401320, 356616, 306744, 299096, 297232, 295374], 'fit_disagrees_gt_half': 0.2258} 89 s
+labelled 30083080, kept after radial order 27187918
+crossings matched 26481366 of 58474697: 90 s
+DONE {"nodes": 8120867, "in_z": 8113970, "moved": 2802372} 93 s

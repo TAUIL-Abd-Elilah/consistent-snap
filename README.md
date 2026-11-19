@@ -114,8 +114,34 @@ of −1.6 for the raw fit (flat: the fit sits off the sheet). The other values a
 - **One scroll, one prediction, one fitter.** Tested only on PHerc0139, the recto prediction and villa
   `fit_spiral` fits.
 
-The fix that would address the steps is a winding-number labelling over the whole sheet graph, so a winding cannot
-change sheet between neighbouring rays. It is not built yet.
+### Tried and failed: winding labels over the sheet graph (`experiments/label_snap.py`, arm U)
+
+The obvious fix for the steps is to give each predicted sheet one winding label, so that a winding cannot change
+sheet between neighbouring rays. `label_snap.py` does this:
+- it links sheet runs on neighbouring rays and slices;
+- it joins them with union-find, carrying integer label offsets taken from the fit's winding id;
+- it refuses links that break the radial order, or that join pieces whose offsets to the fit disagree;
+- it gives each joined piece one offset to the fit, and moves winding w to the sheet labelled w.
+
+Its parameters were set on one test slab, using only checks that do not involve the human wraps. Its bars were fixed
+before any human-wrap score (`NOTES.md`, v3). **It fails them on all three fits.**
+
+| U against A (raw fit) and Cm | seed 1 | seed 2 | band 2 | bar |
+|---|---|---|---|---|
+| hop rate (Cm) | 0.0109 (0.0206) | 0.0109 (0.0205) | 0.0123 (0.0206) | ≤ 0.75 × Cm: pass |
+| duplicate share, fit spacing (A) | 1.19 % (3.6) | 1.16 % (3.5) | 1.08 % (2.29) | ≤ A: pass |
+| per-wrap modal share (Cm) | 0.178 (0.159) | 0.178 (0.165) | 0.147 (0.127) | ≥ Cm + 0.03: **fail** |
+| within 2 vx, gain over A | +13.8 | +14.97 | +15.1 | ≥ +15: **fail** on seeds 1 and 2 |
+| adjacent-pair exact (A) | 58.0 % (63.9) | 59.3 % (64.0) | 57.3 % (67.3) | ≥ A − 2: **fail** |
+
+What it shows:
+- **The links hold.** Winding hops halve and stacking falls to about 1 %.
+- **The offsets don't.** A joined piece often gets the wrong integer offset to the fit. The step then sits between
+  two pieces instead of inside one winding: more neighbouring wraps share a winding (18 → 20-21 %), and fewer land
+  on neighbouring windings (5-10 points down).
+
+Fixing that needs offsets that are consistent between pieces, not one median offset per piece; this is not done.
+Scores and logs: `results/*_U*`.
 
 ## Reproduce
 
@@ -146,7 +172,8 @@ All other settings are the script defaults. Every run's arguments are in `result
 ## Files
 
 - `consistent_snap.py`: the snapper.
-- `tools/`: arm masks, scoring helpers, CT profiles, step and jump counts, figures.
+- `tools/`: arm masks, scoring helpers, CT profiles, step and jump counts, figures, `label_diag.py`.
+- `experiments/`: `track_snap.py` (two tracking variants) and `label_snap.py` (arm U); both failed and are kept as reported failures.
 - `vendor/`: the unchanged scorers and the CT reader.
 - `results/`: all score JSONs and logs behind the tables.
 - `figures/`: CT cross-sections, each showing CT | raw fit | Cm | human wraps. Seed 1 at z 3400, 3700 and 4000;

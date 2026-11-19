@@ -1,0 +1,4 @@
+within_2 A 0.306 B 0.458  B-A +15.1 points, 95% CI +12.4 to +18.1
+within_4 A 0.603 B 0.644  B-A +4.1 points, 95% CI +1.8 to +6.4
+A adjacent exact 0.673 same 0.178 hops 94586 hop_rate 0.0148 modal 0.117 dup(scorer) 0.023
+B adjacent exact 0.573 same 0.212 hops 84122 hop_rate 0.0123 modal 0.147 dup(scorer) 0.025

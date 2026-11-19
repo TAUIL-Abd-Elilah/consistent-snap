@@ -1,0 +1,3 @@
+U_A1 {"shared_share": 0.011920509705688248, "area_cm2": 185.67206072273493, "windings": 115, "nodes": 429862, "same_vx":
+U_A2 {"shared_share": 0.011559635234587761, "area_cm2": 189.35754872380278, "windings": 117, "nodes": 438181, "same_vx":
+U_b2 {"shared_share": 0.010812913333371837, "area_cm2": 183.16929168860275, "windings": 120, "nodes": 429218, "same_vx":

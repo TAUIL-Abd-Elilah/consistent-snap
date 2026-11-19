@@ -1,0 +1,719 @@
+{
+ "wraps": [
+  "w023",
+  "w024",
+  "w025",
+  "w026",
+  "w027",
+  "w028",
+  "w029",
+  "w030",
+  "w031",
+  "w032",
+  "w033",
+  "w034",
+  "w035",
+  "w036",
+  "w037",
+  "w038",
+  "w039",
+  "w040",
+  "w041",
+  "w042",
+  "w043",
+  "w044",
+  "w045",
+  "w047",
+  "w048",
+  "w049",
+  "w050",
+  "w051",
+  "w052",
+  "w053",
+  "w054",
+  "w055",
+  "w056",
+  "w057",
+  "w058",
+  "w059"
+ ],
+ "z_window": [
+  3220,
+  4180
+ ],
+ "arms": {
+  "B": {
+   "meshes": "D:/Snap/runs/p139A2_U",
+   "windings": 117,
+   "nodes": 10308240,
+   "quads_over_radius_cap": 2,
+   "within_2": 0.4646800035699596,
+   "within_4": 0.6446724174058811,
+   "covered_share": 0.06608218279745136,
+   "within_2_covered": 0.46034959357948063,
+   "within_2_uncovered": 0.4649864148401031,
+   "winding_hops_total": 72164,
+   "adjacent_pairs": {
+    "step": 1,
+    "samples": 1244974,
+    "exact_share": 0.592966600105705,
+    "same_winding_share": 0.19913909848719732,
+    "per_pair": {
+     "w023-w024": {
+      "samples": 27595,
+      "exact": 12358,
+      "same_winding": 5446
+     },
+     "w024-w025": {
+      "samples": 29723,
+      "exact": 20276,
+      "same_winding": 4972
+     },
+     "w025-w026": {
+      "samples": 34450,
+      "exact": 20963,
+      "same_winding": 8654
+     },
+     "w026-w027": {
+      "samples": 32637,
+      "exact": 15712,
+      "same_winding": 9617
+     },
+     "w027-w028": {
+      "samples": 29705,
+      "exact": 15429,
+      "same_winding": 6956
+     },
+     "w028-w029": {
+      "samples": 38004,
+      "exact": 24075,
+      "same_winding": 7208
+     },
+     "w029-w030": {
+      "samples": 40995,
+      "exact": 26328,
+      "same_winding": 7948
+     },
+     "w030-w031": {
+      "samples": 38844,
+      "exact": 24580,
+      "same_winding": 5236
+     },
+     "w031-w032": {
+      "samples": 39860,
+      "exact": 29211,
+      "same_winding": 5868
+     },
+     "w032-w033": {
+      "samples": 42488,
+      "exact": 29483,
+      "same_winding": 5760
+     },
+     "w033-w034": {
+      "samples": 27711,
+      "exact": 16159,
+      "same_winding": 4322
+     },
+     "w034-w035": {
+      "samples": 27165,
+      "exact": 14924,
+      "same_winding": 9401
+     },
+     "w035-w036": {
+      "samples": 22052,
+      "exact": 16018,
+      "same_winding": 2842
+     },
+     "w036-w037": {
+      "samples": 27257,
+      "exact": 20126,
+      "same_winding": 2748
+     },
+     "w037-w038": {
+      "samples": 24917,
+      "exact": 17758,
+      "same_winding": 2360
+     },
+     "w038-w039": {
+      "samples": 40139,
+      "exact": 25584,
+      "same_winding": 4849
+     },
+     "w039-w040": {
+      "samples": 37666,
+      "exact": 17929,
+      "same_winding": 4261
+     },
+     "w040-w041": {
+      "samples": 46194,
+      "exact": 22650,
+      "same_winding": 7795
+     },
+     "w041-w042": {
+      "samples": 34867,
+      "exact": 2555,
+      "same_winding": 30034
+     },
+     "w042-w043": {
+      "samples": 28719,
+      "exact": 16816,
+      "same_winding": 4082
+     },
+     "w043-w044": {
+      "samples": 43270,
+      "exact": 25709,
+      "same_winding": 7550
+     },
+     "w044-w045": {
+      "samples": 36917,
+      "exact": 23194,
+      "same_winding": 3369
+     },
+     "w047-w048": {
+      "samples": 32775,
+      "exact": 19930,
+      "same_winding": 5497
+     },
+     "w048-w049": {
+      "samples": 40235,
+      "exact": 21853,
+      "same_winding": 7195
+     },
+     "w049-w050": {
+      "samples": 20022,
+      "exact": 12130,
+      "same_winding": 5503
+     },
+     "w050-w051": {
+      "samples": 18824,
+      "exact": 13005,
+      "same_winding": 4228
+     },
+     "w051-w052": {
+      "samples": 57440,
+      "exact": 35095,
+      "same_winding": 10242
+     },
+     "w052-w053": {
+      "samples": 53943,
+      "exact": 33550,
+      "same_winding": 9757
+     },
+     "w053-w054": {
+      "samples": 49810,
+      "exact": 28477,
+      "same_winding": 12506
+     },
+     "w054-w055": {
+      "samples": 47090,
+      "exact": 25636,
+      "same_winding": 11739
+     },
+     "w055-w056": {
+      "samples": 42839,
+      "exact": 23470,
+      "same_winding": 10675
+     },
+     "w056-w057": {
+      "samples": 43317,
+      "exact": 27935,
+      "same_winding": 5620
+     },
+     "w057-w058": {
+      "samples": 47404,
+      "exact": 33121,
+      "same_winding": 7984
+     },
+     "w058-w059": {
+      "samples": 40100,
+      "exact": 26189,
+      "same_winding": 5699
+     }
+    }
+   },
+   "duplicate_sheet": {
+    "shared_share": 0.025602800542062674,
+    "area_cm2": 236.28479621683994,
+    "windings": 117,
+    "nodes": 2148906,
+    "same_vx": 3.1263026260942057,
+    "most_shared": [
+     [
+      "w103_novA2",
+      0.057
+     ],
+     [
+      "w110_novA2",
+      0.056
+     ],
+     [
+      "w108_novA2",
+      0.054
+     ],
+     [
+      "w109_novA2",
+      0.05
+     ],
+     [
+      "w115_novA2",
+      0.05
+     ],
+     [
+      "w098_novA2",
+      0.046
+     ],
+     [
+      "w102_novA2",
+      0.046
+     ],
+     [
+      "w094_novA2",
+      0.045
+     ],
+     [
+      "w099_novA2",
+      0.045
+     ],
+     [
+      "w106_novA2",
+      0.045
+     ]
+    ]
+   },
+   "per_wrap": {
+    "w023": {
+     "nodes": 217573,
+     "within_2": 145928,
+     "within_4": 169317,
+     "winding_hops": 1806,
+     "distinct_windings": 12,
+     "modal_share": 0.13132762805861195,
+     "covered_nodes": 2146,
+     "covered_within_2": 1590,
+     "uncovered_nodes": 215427,
+     "uncovered_within_2": 144338
+    },
+    "w024": {
+     "nodes": 227769,
+     "within_2": 128454,
+     "within_4": 176374,
+     "winding_hops": 1285,
+     "distinct_windings": 14,
+     "modal_share": 0.13546214294623923,
+     "covered_nodes": 0,
+     "covered_within_2": 0,
+     "uncovered_nodes": 227769,
+     "uncovered_within_2": 128454
+    },
+    "w025": {
+     "nodes": 237327,
+     "within_2": 102601,
+     "within_4": 154912,
+     "winding_hops": 864,
+     "distinct_windings": 14,
+     "modal_share": 0.15985850030985332,
+     "covered_nodes": 10389,
+     "covered_within_2": 3840,
+     "uncovered_nodes": 226938,
+     "uncovered_within_2": 98761
+    },
+    "w026": {
+     "nodes": 258073,
+     "within_2": 97985,
+     "within_4": 155724,
+     "winding_hops": 1499,
+     "distinct_windings": 13,
+     "modal_share": 0.1464321491870232,
+     "covered_nodes": 13737,
+     "covered_within_2": 4151,
+     "uncovered_nodes": 244336,
+     "uncovered_within_2": 93834
+    },
+    "w027": {
+     "nodes": 250652,
+     "within_2": 117840,
+     "within_4": 161137,
+     "winding_hops": 1695,
+     "distinct_windings": 13,
+     "modal_share": 0.17029608345693417,
+     "covered_nodes": 14071,
+     "covered_within_2": 6531,
+     "uncovered_nodes": 236581,
+     "uncovered_within_2": 111309
+    },
+    "w028": {
+     "nodes": 252338,
+     "within_2": 127506,
+     "within_4": 174360,
+     "winding_hops": 1500,
+     "distinct_windings": 11,
+     "modal_share": 0.13727919247533837,
+     "covered_nodes": 14761,
+     "covered_within_2": 5956,
+     "uncovered_nodes": 237577,
+     "uncovered_within_2": 121550
+    },
+    "w029": {
+     "nodes": 255511,
+     "within_2": 139695,
+     "within_4": 181915,
+     "winding_hops": 1856,
+     "distinct_windings": 11,
+     "modal_share": 0.13356787510650578,
+     "covered_nodes": 20662,
+     "covered_within_2": 9898,
+     "uncovered_nodes": 234849,
+     "uncovered_within_2": 129797
+    },
+    "w030": {
+     "nodes": 258246,
+     "within_2": 146806,
+     "within_4": 186844,
+     "winding_hops": 2017,
+     "distinct_windings": 12,
+     "modal_share": 0.13717325683457857,
+     "covered_nodes": 7334,
+     "covered_within_2": 2451,
+     "uncovered_nodes": 250912,
+     "uncovered_within_2": 144355
+    },
+    "w031": {
+     "nodes": 260491,
+     "within_2": 128927,
+     "within_4": 174543,
+     "winding_hops": 1715,
+     "distinct_windings": 12,
+     "modal_share": 0.15098858161026224,
+     "covered_nodes": 13110,
+     "covered_within_2": 3445,
+     "uncovered_nodes": 247381,
+     "uncovered_within_2": 125482
+    },
+    "w032": {
+     "nodes": 263772,
+     "within_2": 135379,
+     "within_4": 182504,
+     "winding_hops": 2151,
+     "distinct_windings": 12,
+     "modal_share": 0.15447332661201946,
+     "covered_nodes": 12276,
+     "covered_within_2": 4850,
+     "uncovered_nodes": 251496,
+     "uncovered_within_2": 130529
+    },
+    "w033": {
+     "nodes": 266648,
+     "within_2": 141018,
+     "within_4": 182190,
+     "winding_hops": 2417,
+     "distinct_windings": 11,
+     "modal_share": 0.16345024425050772,
+     "covered_nodes": 4190,
+     "covered_within_2": 1000,
+     "uncovered_nodes": 262458,
+     "uncovered_within_2": 140018
+    },
+    "w034": {
+     "nodes": 186770,
+     "within_2": 95291,
+     "within_4": 124606,
+     "winding_hops": 842,
+     "distinct_windings": 10,
+     "modal_share": 0.2365375664093222,
+     "covered_nodes": 0,
+     "covered_within_2": 0,
+     "uncovered_nodes": 186770,
+     "uncovered_within_2": 95291
+    },
+    "w035": {
+     "nodes": 183699,
+     "within_2": 71728,
+     "within_4": 110913,
+     "winding_hops": 998,
+     "distinct_windings": 10,
+     "modal_share": 0.25758928168925194,
+     "covered_nodes": 0,
+     "covered_within_2": 0,
+     "uncovered_nodes": 183699,
+     "uncovered_within_2": 71728
+    },
+    "w036": {
+     "nodes": 188151,
+     "within_2": 83747,
+     "within_4": 122023,
+     "winding_hops": 1163,
+     "distinct_windings": 11,
+     "modal_share": 0.2655073223900412,
+     "covered_nodes": 63,
+     "covered_within_2": 21,
+     "uncovered_nodes": 188088,
+     "uncovered_within_2": 83726
+    },
+    "w037": {
+     "nodes": 191569,
+     "within_2": 87894,
+     "within_4": 125099,
+     "winding_hops": 1106,
+     "distinct_windings": 12,
+     "modal_share": 0.2677239626216037,
+     "covered_nodes": 7184,
+     "covered_within_2": 2325,
+     "uncovered_nodes": 184385,
+     "uncovered_within_2": 85569
+    },
+    "w038": {
+     "nodes": 275265,
+     "within_2": 120161,
+     "within_4": 185554,
+     "winding_hops": 1924,
+     "distinct_windings": 13,
+     "modal_share": 0.1949998383219979,
+     "covered_nodes": 11751,
+     "covered_within_2": 5188,
+     "uncovered_nodes": 263514,
+     "uncovered_within_2": 114973
+    },
+    "w039": {
+     "nodes": 285100,
+     "within_2": 157886,
+     "within_4": 209561,
+     "winding_hops": 1955,
+     "distinct_windings": 12,
+     "modal_share": 0.2432036495340259,
+     "covered_nodes": 38059,
+     "covered_within_2": 15703,
+     "uncovered_nodes": 247041,
+     "uncovered_within_2": 142183
+    },
+    "w040": {
+     "nodes": 296822,
+     "within_2": 157619,
+     "within_4": 215775,
+     "winding_hops": 2611,
+     "distinct_windings": 13,
+     "modal_share": 0.2674452554744526,
+     "covered_nodes": 75421,
+     "covered_within_2": 42981,
+     "uncovered_nodes": 221401,
+     "uncovered_within_2": 114638
+    },
+    "w041": {
+     "nodes": 298644,
+     "within_2": 141774,
+     "within_4": 198709,
+     "winding_hops": 2469,
+     "distinct_windings": 16,
+     "modal_share": 0.26528239787830443,
+     "covered_nodes": 52905,
+     "covered_within_2": 30592,
+     "uncovered_nodes": 245739,
+     "uncovered_within_2": 111182
+    },
+    "w042": {
+     "nodes": 208375,
+     "within_2": 92523,
+     "within_4": 140387,
+     "winding_hops": 1412,
+     "distinct_windings": 15,
+     "modal_share": 0.3251084502126265,
+     "covered_nodes": 46630,
+     "covered_within_2": 24615,
+     "uncovered_nodes": 161745,
+     "uncovered_within_2": 67908
+    },
+    "w043": {
+     "nodes": 303132,
+     "within_2": 141783,
+     "within_4": 199764,
+     "winding_hops": 2519,
+     "distinct_windings": 18,
+     "modal_share": 0.23801585871328168,
+     "covered_nodes": 70133,
+     "covered_within_2": 32518,
+     "uncovered_nodes": 232999,
+     "uncovered_within_2": 109265
+    },
+    "w044": {
+     "nodes": 306619,
+     "within_2": 154001,
+     "within_4": 208303,
+     "winding_hops": 2462,
+     "distinct_windings": 17,
+     "modal_share": 0.2151961325569003,
+     "covered_nodes": 53645,
+     "covered_within_2": 29103,
+     "uncovered_nodes": 252974,
+     "uncovered_within_2": 124898
+    },
+    "w045": {
+     "nodes": 310707,
+     "within_2": 114200,
+     "within_4": 182656,
+     "winding_hops": 2082,
+     "distinct_windings": 19,
+     "modal_share": 0.20719823055360898,
+     "covered_nodes": 24148,
+     "covered_within_2": 10582,
+     "uncovered_nodes": 286559,
+     "uncovered_within_2": 103618
+    },
+    "w047": {
+     "nodes": 317818,
+     "within_2": 109891,
+     "within_4": 174856,
+     "winding_hops": 1738,
+     "distinct_windings": 20,
+     "modal_share": 0.12644118589010386,
+     "covered_nodes": 16051,
+     "covered_within_2": 8350,
+     "uncovered_nodes": 301767,
+     "uncovered_within_2": 101541
+    },
+    "w048": {
+     "nodes": 321241,
+     "within_2": 138259,
+     "within_4": 198909,
+     "winding_hops": 1667,
+     "distinct_windings": 20,
+     "modal_share": 0.1739589460507066,
+     "covered_nodes": 10290,
+     "covered_within_2": 5454,
+     "uncovered_nodes": 310951,
+     "uncovered_within_2": 132805
+    },
+    "w049": {
+     "nodes": 357861,
+     "within_2": 158705,
+     "within_4": 219003,
+     "winding_hops": 1711,
+     "distinct_windings": 20,
+     "modal_share": 0.1867828294589572,
+     "covered_nodes": 15185,
+     "covered_within_2": 6917,
+     "uncovered_nodes": 342676,
+     "uncovered_within_2": 151788
+    },
+    "w050": {
+     "nodes": 142649,
+     "within_2": 63470,
+     "within_4": 79387,
+     "winding_hops": 683,
+     "distinct_windings": 12,
+     "modal_share": 0.31201582123017624,
+     "covered_nodes": 2815,
+     "covered_within_2": 635,
+     "uncovered_nodes": 139834,
+     "uncovered_within_2": 62835
+    },
+    "w051": {
+     "nodes": 376108,
+     "within_2": 205789,
+     "within_4": 248386,
+     "winding_hops": 2715,
+     "distinct_windings": 20,
+     "modal_share": 0.11753883069094072,
+     "covered_nodes": 7743,
+     "covered_within_2": 4458,
+     "uncovered_nodes": 368365,
+     "uncovered_within_2": 201331
+    },
+    "w052": {
+     "nodes": 380300,
+     "within_2": 196376,
+     "within_4": 245365,
+     "winding_hops": 2803,
+     "distinct_windings": 20,
+     "modal_share": 0.11243249852260917,
+     "covered_nodes": 10782,
+     "covered_within_2": 2842,
+     "uncovered_nodes": 369518,
+     "uncovered_within_2": 193534
+    },
+    "w053": {
+     "nodes": 378661,
+     "within_2": 186197,
+     "within_4": 235255,
+     "winding_hops": 2765,
+     "distinct_windings": 22,
+     "modal_share": 0.11001253958470596,
+     "covered_nodes": 25015,
+     "covered_within_2": 8269,
+     "uncovered_nodes": 353646,
+     "uncovered_within_2": 177928
+    },
+    "w054": {
+     "nodes": 403609,
+     "within_2": 156016,
+     "within_4": 235162,
+     "winding_hops": 2993,
+     "distinct_windings": 25,
+     "modal_share": 0.08589397946947211,
+     "covered_nodes": 41318,
+     "covered_within_2": 14692,
+     "uncovered_nodes": 362291,
+     "uncovered_within_2": 141324
+    },
+    "w055": {
+     "nodes": 377681,
+     "within_2": 135450,
+     "within_4": 208834,
+     "winding_hops": 2740,
+     "distinct_windings": 24,
+     "modal_share": 0.09210186080810596,
+     "covered_nodes": 3346,
+     "covered_within_2": 526,
+     "uncovered_nodes": 374335,
+     "uncovered_within_2": 134924
+    },
+    "w056": {
+     "nodes": 352504,
+     "within_2": 140478,
+     "within_4": 217842,
+     "winding_hops": 3592,
+     "distinct_windings": 23,
+     "modal_share": 0.10105948347885164,
+     "covered_nodes": 7196,
+     "covered_within_2": 3702,
+     "uncovered_nodes": 345308,
+     "uncovered_within_2": 136776
+    },
+    "w057": {
+     "nodes": 369407,
+     "within_2": 131785,
+     "within_4": 212494,
+     "winding_hops": 3156,
+     "distinct_windings": 25,
+     "modal_share": 0.13350024000677665,
+     "covered_nodes": 10332,
+     "covered_within_2": 4514,
+     "uncovered_nodes": 359075,
+     "uncovered_within_2": 127271
+    },
+    "w058": {
+     "nodes": 370333,
+     "within_2": 161217,
+     "within_4": 228408,
+     "winding_hops": 2786,
+     "distinct_windings": 29,
+     "modal_share": 0.11183496199782844,
+     "covered_nodes": 35842,
+     "covered_within_2": 14984,
+     "uncovered_nodes": 334491,
+     "uncovered_within_2": 146233
+    },
+    "w059": {
+     "nodes": 376815,
+     "within_2": 175654,
+     "within_4": 218367,
+     "winding_hops": 2467,
+     "distinct_windings": 29,
+     "modal_share": 0.14735743038096416,
+     "covered_nodes": 2661,
+     "covered_within_2": 903,
+     "uncovered_nodes": 374154,
+     "uncovered_within_2": 174751
+    }
+   }
+  }
+ }
+}
