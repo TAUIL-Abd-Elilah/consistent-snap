@@ -1,0 +1,3 @@
+arm A: 115 windings; within 2 31.3%, within 4 60.4%; covered 35.6% (6.6% of nodes), uncovered 31.0%; adjacent exact 63.9%; hops 169220; duplicate 3.6%
+arm B: 115 windings; within 2 64.1%, within 4 85.4%; covered 67.8% (6.6% of nodes), uncovered 63.9%; adjacent exact 67.1%; hops 520508; duplicate 17.1%
+B-A within 2 +32.8 points (CI +30.6 to +35.2); duplicate +13.5 -> NO-GO

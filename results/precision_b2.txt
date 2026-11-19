@@ -1,0 +1,3 @@
+wrap triangles 21938362 dropped quads 0
+B2 {"nodes": 400000, "in_zone": 118904, "prec2": 0.2771, "prec4": 0.5282}
+Cm_b2 {"nodes": 400000, "in_zone": 220316, "prec2": 0.6709, "prec4": 0.8707}
