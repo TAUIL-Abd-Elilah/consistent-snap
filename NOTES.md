@@ -160,3 +160,34 @@ Reading: winding hops halve and stacking drops to ~1 %, so the labels do hold sh
 carry a wrong integer offset (base = round(median(phi - label))): neighbouring wraps then land on the same or
 non-adjacent windings (same-winding pairs up, adjacent exact down 5-10 points). The stair-step became an offset error
 between components, not a fix.
+
+## v4: surface renders, raw fit (A) vs matched-only snap (Cm), rules fixed 19 Nov 2026 20:48 UTC (date -u), before any render was made
+- Purpose: show what the snap changes for reading: CT rendered on the surface. No new method, no parameter tuning.
+- Boxes (the figure crops already published, fixed before): seed 1 and seed 2 z 3400-4000, y 2950-3350, x 4250-4650;
+  band 2 z 4700-5100, y 2860-3260, x 4220-4620.
+- Pairing: Cm meshes are the raw fit densified x2, moved radially node by node, so grid index = same fit position.
+  The raw fit is densified x2 the same way (consistent_snap.densify). Each winding with >= 2000 Cm-valid nodes in the
+  box is rendered for both arms on the SAME pixels: pixels where the Cm node is valid (holes masked for both arms).
+- Render: each densified grid upsampled bilinearly to ~1 CT voxel per pixel; normal from the grid; CT level 1
+  (4.8 um) sampled trilinearly along the normal at offsets -3..+3 level-1 voxels; images: offset-0 slice and the
+  max over the 7 offsets. Display: same fixed window for both arms (box 1st-99th percentile of CT).
+- Truth-free numbers on the paired pixels, per winding and pooled (not bars; reported as is): mean offset-0
+  intensity; share of pixels whose offset-0 intensity is above the box median; texture = std of the
+  Laplacian of the offset-0 image. Expect Cm > A on all (consistent with the normal-profile check); any winding where
+  A >= Cm is listed.
+- Human wraps rendered in the same boxes as a reference only (separate parametrization, not paired).
+- Which windings go in the figure: the 3 with the most paired pixels per box, no picking by look.
+- Amendment 20:51 UTC (date -u), before any fit render existed (first run rendered only the human wraps,
+  which are reference only): the >= 2000-node rule left 0 windings (max 1974 in box 1, 1215 in band 2; the box is
+  small). New rule: windings with >= 300 Cm-valid nodes in the box. Everything else unchanged.
+- Results 21:00 UTC (date -u), all 3 fits (b2 rerun with its own wrap folder, the band-2 scorer's; fit
+  renders unchanged, pooled numbers identical). Paired pixels, offset-0 CT level 1 (A -> Cm):
+  seed 1: 30 windings, 15.6 M px; mean 78.3 -> 96.3; above box median 59.7 -> 82.5 %; texture 11.6 -> 14.5.
+  seed 2: 30 windings, 15.4 M px; mean 78.5 -> 96.7; above median 59.9 -> 82.7 %; texture 11.9 -> 14.9.
+  band 2: 23 windings, 10.4 M px; mean 70.6 -> 94.9; above median 55.2 -> 85.2 %; texture 10.5 -> 13.8.
+  Windings where A >= Cm on any of the three: none (0 of 83).
+  Human wraps in the same boxes (reference): mean 86.3 / 78.5, above median 70.4 / 64.7 %, texture 12.6 / 12.5.
+  Cm is brighter than the wraps: it sits nearer the sheet's dense core, the wraps nearer the face. Not a claim that
+  Cm beats human tracing; ink is not tested here. Visible in the renders: papyrus fibre texture where the raw fit
+  shows dark gaps between sheets; dark seams in Cm are the remaining stair-steps.
+  Figures figures/render_{seed1,seed2,band2}.jpg: top 3 windings by paired pixels, plus the wrap with most pixels in the box.

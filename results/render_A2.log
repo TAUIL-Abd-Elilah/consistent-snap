@@ -1,0 +1,57 @@
+ct L1 box (1220, 820, 820)
+w033_novA2 nodes 512 px 199090 A {'mean0': 69.19, 'above_median': 0.503, 'texture': 10.062, 'n': 199090} Cm {'mean0': 83.435, 'above_median': 0.697, 'texture': 11.334, 'n': 199090}
+D:\Snap\tools\render_pair.py:109: RuntimeWarning: All-NaN slice encountered
+  cv2.imwrite(os.path.join(a.out, f'{wn}_{name}_max.png'), to8(np.nanmax(I, 0), m))
+w034_novA2 nodes 794 px 348541 A {'mean0': 58.627, 'above_median': 0.295, 'texture': 8.921, 'n': 348541} Cm {'mean0': 100.878, 'above_median': 0.829, 'texture': 14.867, 'n': 348541}
+w035_novA2 nodes 903 px 356451 A {'mean0': 69.159, 'above_median': 0.508, 'texture': 11.366, 'n': 356451} Cm {'mean0': 93.17, 'above_median': 0.785, 'texture': 14.905, 'n': 356451}
+w036_novA2 nodes 1243 px 506799 A {'mean0': 67.893, 'above_median': 0.467, 'texture': 10.525, 'n': 506799} Cm {'mean0': 83.453, 'above_median': 0.709, 'texture': 12.877, 'n': 506799}
+w037_novA2 nodes 1207 px 443829 A {'mean0': 67.805, 'above_median': 0.459, 'texture': 10.848, 'n': 443829} Cm {'mean0': 86.568, 'above_median': 0.707, 'texture': 13.709, 'n': 443829}
+w038_novA2 nodes 1488 px 620501 A {'mean0': 65.547, 'above_median': 0.411, 'texture': 10.479, 'n': 620501} Cm {'mean0': 91.902, 'above_median': 0.763, 'texture': 14.695, 'n': 620501}
+w039_novA2 nodes 1603 px 657664 A {'mean0': 70.001, 'above_median': 0.472, 'texture': 11.363, 'n': 657664} Cm {'mean0': 94.253, 'above_median': 0.782, 'texture': 15.675, 'n': 657664}
+w040_novA2 nodes 1673 px 692156 A {'mean0': 72.545, 'above_median': 0.522, 'texture': 11.621, 'n': 692156} Cm {'mean0': 91.718, 'above_median': 0.779, 'texture': 15.519, 'n': 692156}
+w041_novA2 nodes 1474 px 568279 A {'mean0': 83.054, 'above_median': 0.661, 'texture': 12.84, 'n': 568279} Cm {'mean0': 99.193, 'above_median': 0.865, 'texture': 15.982, 'n': 568279}
+w042_novA2 nodes 1498 px 575315 A {'mean0': 84.369, 'above_median': 0.678, 'texture': 12.452, 'n': 575315} Cm {'mean0': 98.643, 'above_median': 0.857, 'texture': 15.216, 'n': 575315}
+w043_novA2 nodes 1357 px 476210 A {'mean0': 82.143, 'above_median': 0.638, 'texture': 12.88, 'n': 476210} Cm {'mean0': 96.472, 'above_median': 0.823, 'texture': 16.015, 'n': 476210}
+w044_novA2 nodes 1372 px 485060 A {'mean0': 72.695, 'above_median': 0.529, 'texture': 11.625, 'n': 485060} Cm {'mean0': 94.397, 'above_median': 0.825, 'texture': 14.951, 'n': 485060}
+w045_novA2 nodes 1393 px 476765 A {'mean0': 80.759, 'above_median': 0.645, 'texture': 12.058, 'n': 476765} Cm {'mean0': 98.589, 'above_median': 0.88, 'texture': 14.196, 'n': 476765}
+w046_novA2 nodes 1405 px 494498 A {'mean0': 83.879, 'above_median': 0.688, 'texture': 12.157, 'n': 494498} Cm {'mean0': 98.948, 'above_median': 0.86, 'texture': 13.887, 'n': 494498}
+w047_novA2 nodes 1468 px 557326 A {'mean0': 81.85, 'above_median': 0.642, 'texture': 11.87, 'n': 557326} Cm {'mean0': 96.898, 'above_median': 0.847, 'texture': 13.779, 'n': 557326}
+w048_novA2 nodes 1092 px 324487 A {'mean0': 84.717, 'above_median': 0.691, 'texture': 12.882, 'n': 324487} Cm {'mean0': 100.159, 'above_median': 0.884, 'texture': 15.913, 'n': 324487}
+w049_novA2 nodes 1415 px 488183 A {'mean0': 83.36, 'above_median': 0.677, 'texture': 13.944, 'n': 488183} Cm {'mean0': 95.304, 'above_median': 0.836, 'texture': 15.968, 'n': 488183}
+w050_novA2 nodes 1669 px 664519 A {'mean0': 80.304, 'above_median': 0.625, 'texture': 14.778, 'n': 664519} Cm {'mean0': 98.162, 'above_median': 0.846, 'texture': 17.057, 'n': 664519}
+w051_novA2 nodes 1753 px 738134 A {'mean0': 84.382, 'above_median': 0.686, 'texture': 14.48, 'n': 738134} Cm {'mean0': 97.356, 'above_median': 0.839, 'texture': 17.142, 'n': 738134}
+w052_novA2 nodes 1816 px 754186 A {'mean0': 80.306, 'above_median': 0.632, 'texture': 13.954, 'n': 754186} Cm {'mean0': 95.346, 'above_median': 0.82, 'texture': 17.531, 'n': 754186}
+w053_novA2 nodes 1907 px 810479 A {'mean0': 77.514, 'above_median': 0.596, 'texture': 12.695, 'n': 810479} Cm {'mean0': 96.807, 'above_median': 0.828, 'texture': 16.183, 'n': 810479}
+w054_novA2 nodes 1864 px 793387 A {'mean0': 78.679, 'above_median': 0.592, 'texture': 11.525, 'n': 793387} Cm {'mean0': 97.654, 'above_median': 0.84, 'texture': 15.657, 'n': 793387}
+w055_novA2 nodes 1840 px 794003 A {'mean0': 73.585, 'above_median': 0.528, 'texture': 10.986, 'n': 794003} Cm {'mean0': 98.737, 'above_median': 0.828, 'texture': 15.011, 'n': 794003}
+w056_novA2 nodes 1325 px 609648 A {'mean0': 83.275, 'above_median': 0.647, 'texture': 11.436, 'n': 609648} Cm {'mean0': 98.242, 'above_median': 0.828, 'texture': 13.973, 'n': 609648}
+w057_novA2 nodes 948 px 441580 A {'mean0': 79.521, 'above_median': 0.602, 'texture': 10.612, 'n': 441580} Cm {'mean0': 95.743, 'above_median': 0.829, 'texture': 12.576, 'n': 441580}
+w058_novA2 nodes 852 px 399698 A {'mean0': 88.75, 'above_median': 0.729, 'texture': 11.697, 'n': 399698} Cm {'mean0': 102.088, 'above_median': 0.887, 'texture': 13.89, 'n': 399698}
+w059_novA2 nodes 736 px 375978 A {'mean0': 92.803, 'above_median': 0.77, 'texture': 12.035, 'n': 375978} Cm {'mean0': 107.085, 'above_median': 0.897, 'texture': 13.563, 'n': 375978}
+w060_novA2 nodes 597 px 301953 A {'mean0': 87.363, 'above_median': 0.684, 'texture': 11.513, 'n': 301953} Cm {'mean0': 109.872, 'above_median': 0.922, 'texture': 14.904, 'n': 301953}
+w061_novA2 nodes 459 px 227318 A {'mean0': 96.022, 'above_median': 0.859, 'texture': 12.351, 'n': 227318} Cm {'mean0': 109.064, 'above_median': 0.945, 'texture': 14.836, 'n': 227318}
+w062_novA2 nodes 336 px 184195 A {'mean0': 92.335, 'above_median': 0.852, 'texture': 11.795, 'n': 184195} Cm {'mean0': 102.399, 'above_median': 0.913, 'texture': 13.73, 'n': 184195}
+D:\Snap\tools\render_pair.py:138: RuntimeWarning: All-NaN slice encountered
+  cv2.imwrite(os.path.join(a.out, f'wrap_{tag}_max.png'), to8(np.nanmax(I, 0), m))
+wrap w025 {'mean0': 78.34943389892578, 'above_median': 0.617626372386313, 'texture': 12.747389793395996, 'n': 2055908}
+wrap w026 {'mean0': 77.7436752319336, 'above_median': 0.6093365467209605, 'texture': 12.08071517944336, 'n': 2001211}
+wrap w027 {'mean0': 79.10344696044922, 'above_median': 0.6211764366292346, 'texture': 12.66439151763916, 'n': 1870768}
+wrap w028 {'mean0': 82.78815460205078, 'above_median': 0.6747410884846922, 'texture': 12.246319770812988, 'n': 1798684}
+wrap w029 {'mean0': 87.24524688720703, 'above_median': 0.7212445001371972, 'texture': 12.474794387817383, 'n': 1774817}
+wrap w030 {'mean0': 87.90193176269531, 'above_median': 0.7125778129768509, 'texture': 13.637504577636719, 'n': 1705853}
+wrap w040 {'mean0': 85.71791076660156, 'above_median': 0.7019676335964402, 'texture': 11.047627449035645, 'n': 564536}
+wrap w041 {'mean0': 97.64612579345703, 'above_median': 0.8169116089530861, 'texture': 11.73157024383545, 'n': 495695}
+wrap w043 {'mean0': 96.01055908203125, 'above_median': 0.8186956571546401, 'texture': 12.045302391052246, 'n': 436465}
+wrap w044 {'mean0': 104.424072265625, 'above_median': 0.8550562976625011, 'texture': 13.448861122131348, 'n': 362182}
+wrap w045 {'mean0': 99.29187774658203, 'above_median': 0.8751262765847949, 'texture': 12.812464714050293, 'n': 262321}
+wrap w031 {'mean0': 83.0899658203125, 'above_median': 0.6648444033572803, 'texture': 12.754045486450195, 'n': 1587952}
+wrap w032 {'mean0': 81.89257049560547, 'above_median': 0.6528931167289993, 'texture': 12.345577239990234, 'n': 1579162}
+wrap w042 {'mean0': 97.02404022216797, 'above_median': 0.8282349941917655, 'texture': 11.86638355255127, 'n': 415789}
+wrap w047 {'mean0': 112.85255432128906, 'above_median': 0.9823785558283706, 'texture': 12.937407493591309, 'n': 73717}
+wrap w024 {'mean0': 92.43272399902344, 'above_median': 0.781783602596709, 'texture': 14.185065269470215, 'n': 2003305}
+wrap w033 {'mean0': 86.65827941894531, 'above_median': 0.7288221996831268, 'texture': 12.896870613098145, 'n': 1508490}
+wrap w039 {'mean0': 84.67868041992188, 'above_median': 0.6940383173375778, 'texture': 11.562597274780273, 'n': 717482}
+wrap w038 {'mean0': 90.83857727050781, 'above_median': 0.7461518181265083, 'texture': 12.921046257019043, 'n': 887562}
+wrap w023 {'mean0': 96.07072448730469, 'above_median': 0.7961073531127896, 'texture': 14.18690299987793, 'n': 1988056}
+pooled A {'mean0': 78.45343780517578, 'above_median': 0.5992568640119451, 'n': 15366232} Cm {'mean0': 96.66699981689453, 'above_median': 0.8274824303056207, 'n': 15366232}
+A >= Cm: {'mean0': [], 'above_median': [], 'texture': []} top3 ['w053_novA2', 'w055_novA2', 'w054_novA2']

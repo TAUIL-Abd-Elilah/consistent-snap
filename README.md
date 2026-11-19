@@ -103,6 +103,33 @@ sheets that already have one. Cm drops those nodes and gives up about 12 points 
 of −1.6 for the raw fit (flat: the fit sits off the sheet). The other values are +17.6 for C, +19.5 for N and
 +21.6 for the human wraps themselves (`results/profile_box1.txt`). The snapped surfaces sit on the recto face.
 
+## What the snap changes on the rendered surface
+
+A surface helps reading only if the CT rendered on it shows papyrus. `tools/render_pair.py` renders the raw fit and
+the matched-only snap on **the same pixels**. This works because Cm is the raw fit densified ×2, with each node moved
+along its ray, so a grid index is the same fit position in both. Holes in Cm are masked in both arms. CT is level 1
+(4.8 µm), sampled on the surface. The boxes are the published figure crops. Every winding with at least 300 snapped
+nodes in a box is included. The rules were written in `NOTES.md` (v4) before any render was made.
+
+| paired pixels, A → Cm | seed 1 (30 windings) | seed 2 (30) | band 2 (23) | human wraps, same box |
+|---|---|---|---|---|
+| mean CT on the surface | 78.3 → 96.3 | 78.5 → 96.7 | 70.6 → 94.9 | 86.3 / 78.5 |
+| pixels above the box median | 59.7 → 82.5 % | 59.9 → 82.7 % | 55.2 → 85.2 % | 70.4 / 64.7 % |
+| texture (std of Laplacian) | 11.6 → 14.5 | 11.9 → 14.9 | 10.5 → 13.8 | 12.6 / 12.5 |
+
+- **Every winding improves.** On none of the 83 windings does the raw fit score as well as Cm on any of the three
+  measures.
+- **What the renders show.** The raw fit cuts through the dark gaps between sheets. The snap shows papyrus fibre
+  texture over most of the same area, and the human-traced surface shows the same pattern.
+- **The dark seams in Cm are the stair-steps** (see below).
+- **Brighter is not better than the human traces.** Cm sits nearer the sheet's dense core, while the human traces
+  sit nearer its face.
+- **Ink is not tested here.**
+
+![seed 1: raw fit (left) and matched-only snap (right) on the same pixels, three windings, plus a human wrap in the same box](figures/render_seed1.jpg)
+
+Seed 2: `figures/render_seed2.jpg`; band 2: `figures/render_band2.jpg`. Numbers: `results/render_stats_*.json`.
+
 ## What is not solved
 
 - **Stair-steps.** The fit drifts across sheets. Where it does, the snap moves a winding from one sheet to the next
@@ -172,7 +199,7 @@ All other settings are the script defaults. Every run's arguments are in `result
 ## Files
 
 - `consistent_snap.py`: the snapper.
-- `tools/`: arm masks, scoring helpers, CT profiles, step and jump counts, figures, `label_diag.py`.
+- `tools/`: arm masks, scoring helpers, CT profiles, step and jump counts, figures, surface renders (`render_pair.py`), `label_diag.py`.
 - `experiments/`: `track_snap.py` (two tracking variants) and `label_snap.py` (arm U); both failed and are kept as reported failures.
 - `vendor/`: the unchanged scorers and the CT reader.
 - `results/`: all score JSONs and logs behind the tables.
