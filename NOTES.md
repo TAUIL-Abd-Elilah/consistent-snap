@@ -191,3 +191,58 @@ between components, not a fix.
   Cm beats human tracing; ink is not tested here. Visible in the renders: papyrus fibre texture where the raw fit
   shows dark gaps between sheets; dark seams in Cm are the remaining stair-steps.
   Figures figures/render_{seed1,seed2,band2}.jpg: top 3 windings by paired pixels, plus the wrap with most pixels in the box.
+
+## v5: label_snap --stitch (joint offsets between components), bars fixed 19 Nov 2026 21:05 UTC (date -u), before any code was written
+- Why: U failed because each sheet component took its own offset round(median(phi - label)); neighbouring pieces
+  got offsets off by one, so steps moved between pieces (adjacent exact -5..-10, same-winding pairs up).
+- Method: everything in U unchanged up to the components. New step: on every ray, two radially consecutive sheet
+  nodes from different kept components a, b, with a radial gap below gap-max x local pitch (no missing sheet
+  between), vote that b's offset = a's offset + (1 - lab_b + lab_a), i.e. consecutive sheets on a ray are consecutive
+  windings. Per component pair, the modal vote is used if it has >= vote-min votes and >= vote-share of the pair's
+  votes. Components are joined greedily, most votes first, by union-find with integer potentials; a join that
+  contradicts an earlier one is refused. Each joined group gets ONE offset to the fit: round(median(phi - label))
+  over all its nodes. Then LIS and assignment exactly as in U.
+- Parameters (gap-max, vote-min, vote-share) set on the smoke slab z 3560-3680 from truth-free counts only (share of
+  consecutive kept node pairs whose labels differ by exactly 1; share of nodes with |phi - L| > 0.5; nodes moved;
+  jump shares; duplicate share), then frozen here before the first human-wrap score. U's frozen parameters stay.
+- Bars (same five as v3, against the same fit's A and Cm), on ALL THREE fits (novA1, novA2, b2A1); any failure is
+  reported as a failure:
+  modal share >= Cm + 0.03; hop rate <= 0.75 x Cm hop rate; within_2 >= A + 15 points; duplicate share (native)
+  <= A; adjacent-exact >= A - 2 points.
+- Development 21:07 UTC (smoke slab, truth-free): U reproduces (moved 301,043, as before). Stitch without a guard:
+  consecutive pairs with label diff 1: 0.670 -> 0.870, but one group takes 96 % of nodes, cycle contradictions 1013
+  vs 577 consistent, and nodes with |phi - L| > 0.5 go 17 % -> 85 %: votes chain across missed/extra sheets and the
+  labels drift away from the fit. Added --group-tol: a join is refused if the two groups' mean (phi - L) differ by more
+  than group-tol after the shift (the comp-tol idea one level up).
+- Sweep group-tol (smoke, truth-free): 0.25 / 0.4 / 0.6 -> consecutive diff-1 0.701 / 0.711 / 0.754; |phi - L| > 0.5
+  18.3 / 20.7 / 31.4 %; moved 304,817 / 302,911 / 296,478 (U 301,043; consecutive 0.670; disagree 17.2 %).
+  Diagnosis (U, smoke): radially consecutive kept sheets get label diff 0 / 1 / 2 in 12 / 68 / 20 % of pairs; the fit's
+  phi step across those pairs has median 0.69 / 1.03 / 1.38: label skips sit where the fit packs more windings than
+  sheets (see pitch over-packing). Labels tied to the fit inherit it; stitching against the fit makes labels drift.
+- FROZEN 21:09 UTC (date -u), rule set after seeing the three sweep values above (stated plainly): the largest
+  consecutive diff-1 share whose fit disagreement stays <= 25 % -> --stitch --gap-max 1.6 --vote-min 20 --vote-share 0.7
+  --group-tol 0.4; all U parameters unchanged.
+  Prediction written before scoring: the change from U is small (consecutive 0.67 -> 0.71), so S will very likely FAIL
+  the adjacent bar (U was -4.7 to -10 points) and the modal bar. Run anyway because it is cheap and pre-registered.
+- S full runs 21:19 UTC: moved 2.76 / 2.82 / 2.84 M (U 2.76 / 2.80 / 2.82); one large group per band (23-28 M
+  nodes), cycle contradictions 3801 / 3409 / 3532 vs consistent 1720 / 1597 / 1747; consecutive diff-1 share
+  0.634 / 0.649 / 0.635. Duplicate share native S 1.14 / 1.13 / 1.05 % vs A 3.57 / 3.54 / 2.29 % -> PASS x3.
+  Human-wrap scorers started ~21:20 UTC.
+- 22:00 UTC: moved D:/Snap/runs/* (except *_S) to C:/VesuviusTemp/snap_moved/runs and deleted D:/Snap/ctcache: First Letters' render job needs D: >= 61 GB free and was skipping windings.
+- 22:12 UTC: moved D:/Snap/p4 to C:/VesuviusTemp/p4 (D: floor of First Letters' job).
+- 20 Nov 00:18 UTC: PC restarted ~23:xx; S scorers and the Paris 4 ink render had died unfinished. Snap outputs and the 11.5 GB ink mirror survived. Restarted both detached (scorers 1 thread each, render 5 threads).
+- 05:24 UTC: Paris 4 renders done (paired px 71.5 M; mean ink A 25.6, Cm 28.6, secondary). Normalisation amended to p95 over paired pixels (PREREG_P4 amendment, before any metric). Frame check: our A render correlates 0.22 with the team's published gen-19 ink render (unflipped), 0.01 flipped. Metric job queued last on the First Letters GPU queue (bash C:/VesuviusTemp/p4/metric_job.sh).
+
+### v5 S human-wrap scores (finished ~06:26 UTC 20 Nov, date -u)
+| | seed 1 | seed 2 | band 2 |
+|---|---|---|---|
+| within 2, A -> S (CI) | 31.3 -> 45.2 (+13.8, +11.2..+16.6) | 31.5 -> 46.6 (+15.1, +12.5..+17.9) | 30.6 -> 46.1 (+15.4, +12.7..+18.3) |
+| adjacent exact (U) | 63.9 -> 59.8 (58.0) | 64.0 -> 60.1 (59.3) | 67.3 -> 59.0 (57.3) |
+| same-winding pairs | 17.9 -> 19.8 | 17.8 -> 19.7 | 17.8 -> 20.5 |
+| hop rate (Cm) | 0.0106 (0.0206) | 0.0108 (0.0205) | 0.0117 (0.0206) |
+| modal (Cm) | 0.174 (0.159) | 0.176 (0.165) | 0.153 (0.127) |
+| duplicate native vs A | 1.14 vs 3.57 | 1.13 vs 3.54 | 1.05 vs 2.29 |
+Bars: modal >= Cm + 0.03 FAIL x3 (+0.015, +0.011, +0.026); hop rate PASS x3; within_2 >= A + 15 FAIL seed 1, pass
+seeds 2 / band 2; duplicate PASS x3; adjacent >= A - 2 FAIL x3 (-4.1, -3.9, -8.3).
+**Verdict: S FAILS, as predicted before scoring.** Stitching moved adjacent exact up 0.8-1.8 points over U, far short.
+Stair-step work stops here (decision written 19 Nov: no further tuning).

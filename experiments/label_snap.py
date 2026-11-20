@@ -313,6 +313,123 @@ def assign(L, R, S, HS, HR, HW, PIT, nray, reach, D_r):
 
 # --------------------------------------------------------------------------------------------- main
 
+@njit(cache=True)
+def stitch_votes(L, root, lab, R, S, PIT, nray, gap_max, va, vb, vd):
+    """For radially consecutive labelled nodes of different components on each ray (gap < gap_max pitch), vote
+    base_b - base_a = 1 - lab_b + lab_a. Returns the number of votes written."""
+    n = 0
+    for k in range(nray):
+        s0, s1 = S[k], S[k + 1]
+        prev = -1
+        pit = PIT[k] if PIT[k] > 0 else 12.0
+        for i in range(s0, s1):
+            if L[i] == -2147483648:
+                continue
+            if prev >= 0 and root[i] != root[prev] and R[i] - R[prev] < gap_max * pit and R[i] > R[prev]:
+                va[n] = root[prev]; vb[n] = root[i]; vd[n] = 1 - lab[i] + lab[prev]
+                n += 1
+            prev = i
+    return n
+
+@njit(cache=True)
+def _consec(L, R, S, PIT, nray, gap_max):
+    n = 0; good = 0
+    for k in range(nray):
+        prev = -1
+        pit = PIT[k] if PIT[k] > 0 else 12.0
+        for i in range(S[k], S[k + 1]):
+            if L[i] == -2147483648:
+                continue
+            if prev >= 0 and R[i] - R[prev] < gap_max * pit and R[i] > R[prev]:
+                n += 1
+                if L[i] - L[prev] == 1:
+                    good += 1
+            prev = i
+    return n, good
+
+
+def consec_share(L, R, S, PIT, nray, gap_max):
+    n, g = _consec(L, R, S, PIT, nray, gap_max)
+    return round(g / max(n, 1), 4)
+
+
+def stitch(L, root, lab, R, S, PIT, nray, PHI, base, good_c, gap_max, vote_min, vote_share, group_tol):
+    N = len(L)
+    va = np.empty(N, np.int64); vb = np.empty(N, np.int64); vd = np.empty(N, np.int64)
+    n = stitch_votes(L, root, lab, R, S, PIT, nray, gap_max, va, vb, vd)
+    va, vb, vd = va[:n], vb[:n], vd[:n]
+    # canonical pair order a < b (flip the sign of d)
+    sw = va > vb
+    a_, b_ = np.where(sw, vb, va), np.where(sw, va, vb)
+    d_ = np.where(sw, -vd, vd)
+    keys = np.stack([a_, b_, d_], 1)
+    uk, cnt = np.unique(keys, axis=0, return_counts=True)
+    pk, pinv = np.unique(uk[:, :2], axis=0, return_inverse=True)
+    pinv = pinv.ravel()
+    tot = np.bincount(pinv, weights=cnt)
+    o = np.lexsort((-cnt, pinv))
+    first = np.r_[0, np.nonzero(np.diff(pinv[o]))[0] + 1]
+    mi = o[first]
+    mc = cnt[mi]; ok = (mc >= vote_min) & (mc >= vote_share * tot[pinv[mi]])
+    E = uk[mi][ok]; W = mc[ok]
+    order = np.argsort(-W, kind='stable')
+    comps = np.nonzero(good_c)[0]
+    par = {int(c): int(c) for c in comps}; pot = {int(c): 0 for c in comps}; sz = {int(c): 1 for c in comps}
+    fm = good_c[root] & np.isfinite(PHI)
+    csum = np.bincount(root[fm], weights=(PHI - lab)[fm], minlength=N)
+    ccnt = np.bincount(root[fm], minlength=N).astype(np.float64)
+    gsum = {int(c): float(csum[c]) for c in comps}; gcnt = {int(c): float(ccnt[c]) + 1e-9 for c in comps}
+
+    def find(x):
+        p = 0; y = x
+        while par[y] != y:
+            p += pot[y]; y = par[y]
+        r = y; y = x; acc = p
+        while par[y] != y:   # path compression
+            nx = par[y]; pv = pot[y]; par[y] = r; pot[y] = acc; acc -= pv; y = nx
+        return r, p
+
+    used = refused = same_ok = same_bad = 0
+    # gsum/gcnt of a root: sum/count of (phi - lab - pot_to_root) over its nodes, so the mean is the root's offset
+    for e in order:
+        a, b, d = int(E[e, 0]), int(E[e, 1]), int(E[e, 2])   # want off_b - off_a = d
+        if a not in par or b not in par:
+            continue
+        ra, pa = find(a); rb, pb = find(b)
+        if ra == rb:
+            if pb - pa == d: same_ok += 1
+            else: same_bad += 1
+            continue
+        # off_x = off_root + pot_x ; need (off_rb + pb) - (off_ra + pa) = d, i.e. off_rb = off_ra + sh
+        sh = pa + d - pb
+        if abs(gsum[rb] / gcnt[rb] - (gsum[ra] / gcnt[ra] + sh)) > group_tol:
+            refused += 1
+            continue
+        if sz[ra] < sz[rb]:
+            gsum[rb] += gsum[ra] + gcnt[ra] * sh; gcnt[rb] += gcnt[ra]
+            par[ra] = rb; pot[ra] = pb - pa - d; sz[rb] += sz[ra]
+        else:
+            gsum[ra] += gsum[rb] - gcnt[rb] * sh; gcnt[ra] += gcnt[rb]
+            par[rb] = ra; pot[rb] = pa + d - pb; sz[ra] += sz[rb]
+        used += 1
+    groot = np.full(N, -1, np.int64); gpot = np.zeros(N, np.int64)
+    for c in comps:
+        r, p = find(int(c)); groot[c] = r; gpot[c] = p
+    # one offset per group: median(phi - lab - gpot) over all nodes of the group
+    m = good_c[root] & np.isfinite(PHI)
+    g = groot[root[m]]; v = PHI[m] - lab[m] - gpot[root[m]]
+    oo = np.lexsort((v, g)); gg = g[oo]; vv = v[oo]
+    st = np.r_[0, np.nonzero(np.diff(gg))[0] + 1]; en = np.r_[st[1:], len(gg)]
+    gbase = np.zeros(N, np.int64); gbase[gg[st]] = np.rint(vv[(st + en) // 2]).astype(np.int64)
+    newbase = base.copy()
+    newbase[comps] = gbase[groot[comps]] + gpot[comps]
+    gs = np.bincount(groot[comps], weights=np.bincount(root, minlength=N)[comps])
+    big = np.sort(gs[gs > 0])[::-1]
+    info = dict(votes=int(n), pairs=int(len(pk)), edges_ok=int(ok.sum()), joined=used, refused_fit=refused, cycle_ok=same_ok,
+                cycle_bad=same_bad, groups=int((gs > 0).sum()), largest_groups=[int(x) for x in big[:6]],
+                changed_comp=int((newbase[comps] != base[comps]).sum()), comps=int(len(comps)))
+    return newbase, info
+
 
 def main():
     ap = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
@@ -339,6 +456,11 @@ def main():
     ap.add_argument('--reach', type=float, default=1.5)
     ap.add_argument('--bbox', type=int, nargs=4, default=None)
     ap.add_argument('--threads', type=int, default=8)
+    ap.add_argument('--stitch', action='store_true', help='v5: joint offsets between components')
+    ap.add_argument('--gap-max', type=float, default=1.6)
+    ap.add_argument('--vote-min', type=int, default=20)
+    ap.add_argument('--vote-share', type=float, default=0.7)
+    ap.add_argument('--group-tol', type=float, default=0.4)
     ap.add_argument('--dump', default=None, help='npz of nodes/labels for diagnostics')
     a = ap.parse_args()
     import numba
@@ -451,6 +573,18 @@ def main():
                share_in_kept=round(float(good_c[root].mean()), 4), largest=[int(x) for x in big[:10]],
                fit_disagrees_gt_half=round(float((dev[good_c[root] & fin] > 0.5).mean()), 4))
     print('components', cst, f'{time.time() - t0:.0f} s', flush=True)
+    if a.stitch:
+        # consecutive-pair check before stitching (truth-free)
+        newbase, sinfo = stitch(L, root, lab, R, S, PIT, K * M, PHI, base, good_c, a.gap_max, a.vote_min, a.vote_share, a.group_tol)
+        base = newbase
+        L = np.where(good_c[root], lab + base[root], -2147483648).astype(np.int64)
+        dev = np.abs(val - base[root])
+        sinfo['fit_disagrees_gt_half'] = round(float((dev[good_c[root] & fin] > 0.5).mean()), 4)
+        print('stitch', sinfo, f'{time.time() - t0:.0f} s', flush=True)
+        cst['stitch'] = sinfo
+    cons = consec_share(L, R, S, PIT, K * M, a.gap_max)
+    cst['consecutive_diff1'] = cons
+    print('consecutive labelled pairs with label diff 1:', cons, flush=True)
     if a.dump:
         np.savez(a.dump, R=R, PHI=PHI, RAY=RAY, root=root, lab=lab, base=base, M=M, K=K, PIT=PIT)
     del val, dev, root, lab

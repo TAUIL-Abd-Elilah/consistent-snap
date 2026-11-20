@@ -167,7 +167,20 @@ What it shows:
   two pieces instead of inside one winding: more neighbouring wraps share a winding (18 → 20-21 %), and fewer land
   on neighbouring windings (5-10 points down).
 
-Fixing that needs offsets that are consistent between pieces, not one median offset per piece; this is not done.
+A second attempt, arm S (`label_snap.py --stitch`), joins the pieces by votes. Neighbouring sheets on a ray vote for
+neighbouring windings, and a join is refused if the fit disagrees by more than 0.4 winding. It also **fails** its
+pre-registered bars, as predicted in `NOTES.md` before scoring:
+
+| S | seed 1 | seed 2 | band 2 |
+|---|---|---|---|
+| adjacent-pair exact (A / U) | 59.8 % (63.9 / 58.0) | 60.1 % (64.0 / 59.3) | 59.0 % (67.3 / 57.3) |
+| modal share (Cm) | 0.174 (0.159) | 0.176 (0.165) | 0.153 (0.127) |
+| hop rate (Cm) | 0.0106 (0.0206) | 0.0108 (0.0205) | 0.0117 (0.0206) |
+
+The cause is in the data. Among radially neighbouring sheets, U labels about 20 % two windings apart. In those pairs
+the fit's own winding id rises by about 1.4 across one sheet gap, so the fit has more windings than there are sheets.
+Labels tied to the fit inherit that error. Labels that override the fit drift away from it. We stopped work on the
+stair-steps here.
 Scores and logs: `results/*_U*`.
 
 ## Reproduce

@@ -1,0 +1,15 @@
+120 windings, 250 slices x 2048 rays
+nodes slice 1/250 z 4400: 1 s
+nodes slice 51/250 z 4600: 12 s
+nodes slice 101/250 z 4800: 26 s
+nodes slice 151/250 z 5000: 38 s
+nodes slice 201/250 z 5200: 50 s
+34265817 sheet nodes, 59931556 fitted crossings, phi finite 0.924: 62 s
+66528547 links (ray 33711754, slice 32816793): 81 s
+union {'used': 61236022, 'merged': 31516106, 'cycle_ok': 26941892, 'cycle_bad': 48397, 'refused_order': 118373, 'skipped_phi': 5292525, 'refused_dev': 2611254} 125 s
+components {'components_kept': 5364, 'nodes_in_kept': 29100538, 'share_in_kept': 0.8493, 'largest': [1824809, 1074659, 485737, 316734, 314957, 291580, 291200, 255364, 254883, 251190], 'fit_disagrees_gt_half': 0.2414} 140 s
+stitch {'votes': 13246811, 'pairs': 22976, 'edges_ok': 15908, 'joined': 4345, 'refused_fit': 6284, 'cycle_ok': 1747, 'cycle_bad': 3532, 'groups': 1019, 'largest_groups': [23070846, 1641278, 374003, 337901, 291703, 125353], 'changed_comp': 1140, 'comps': 5364, 'fit_disagrees_gt_half': 0.3377} 175 s
+consecutive labelled pairs with label diff 1: 0.6349
+labelled 29100538, kept after radial order 27060085
+crossings matched 26141561 of 59931556: 176 s
+DONE {"nodes": 8142686, "in_z": 8137183, "moved": 2835763} 182 s
