@@ -1,0 +1,29 @@
+--- C:/VesuviusTemp/p4/metric/get_ink_metrics.orig.py	2026-11-20 19:17:47.605103800 +0000
++++ C:/VesuviusTemp/p4/metric/get_ink_metrics.py	2026-11-20 19:17:47.787811500 +0000
+@@ -144,6 +144,26 @@
+     set_nnunet_env()
+     import torch
+     from nnunetv2.inference.predict_from_raw_data import nnUNetPredictor
++    # local fix (not in villa): skip trainer modules that fail to import (legacy v1 files need the absent 'nnunet')
++    import importlib, pkgutil
++    import nnunetv2.inference.predict_from_raw_data as _pr
++    from batchgenerators.utilities.file_and_folder_operations import join as _join
++    def _find(folder, class_name, current_module):
++        for _, modname, ispkg in pkgutil.iter_modules([folder]):
++            if not ispkg:
++                try:
++                    m = importlib.import_module(current_module + "." + modname)
++                except ImportError:
++                    continue
++                if hasattr(m, class_name):
++                    return getattr(m, class_name)
++        for _, modname, ispkg in pkgutil.iter_modules([folder]):
++            if ispkg:
++                tr = _find(_join(folder, modname), class_name, current_module + "." + modname)
++                if tr is not None:
++                    return tr
++        return None
++    _pr.recursive_find_python_class = _find
+ 
+     # CUDA_VISIBLE_DEVICES already narrowed CUDA to one GPU.
+     device = torch.device('cuda', 0) if args.device == 'cuda' else torch.device(args.device)

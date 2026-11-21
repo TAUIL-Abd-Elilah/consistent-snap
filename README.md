@@ -10,6 +10,8 @@ with bars fixed before scoring.
 ("matched-only", Cm). It raises the share of human-wrap points within 2 voxels of a fitted surface from about 31 % to
 about 53 %. Precision rises from about 28 % to 67 %. Both gains replicate on a second fit seed and on a second z band.
 Stacking does not rise on two of the three fits; on band 2 it rises by 0.15 points, which fails that bar.
+On the team's own Paris 4 fit, the snap raises the predicted ink area by 20 % on the same pixels (the team's ink
+metric, bars fixed in advance).
 
 ![seed 1, z 3700: CT | raw fit (red) | matched-only snap (green) | human wraps (yellow)](figures/seed1_z3700.jpg)
 
@@ -124,11 +126,39 @@ nodes in a box is included. The rules were written in `NOTES.md` (v4) before any
 - **The dark seams in Cm are the stair-steps** (see below).
 - **Brighter is not better than the human traces.** Cm sits nearer the sheet's dense core, while the human traces
   sit nearer its face.
-- **Ink is not tested here.**
+- **Ink is tested on Paris 4 below.**
 
 ![seed 1: raw fit (left) and matched-only snap (right) on the same pixels, three windings, plus a human wrap in the same box](figures/render_seed1.jpg)
 
 Seed 2: `figures/render_seed2.jpg`; band 2: `figures/render_band2.jpg`. Numbers: `results/render_stats_*.json`.
+
+## Ink on a second scroll: Paris 4, the team's own spiral fit
+
+Does the snap help ink, on a fit we did not make? We took the team's published PHerc. Paris 4 fit (gen-19,
+`20260926044226-spiral-output-generation-19`), snapped it with the frozen v1 settings (no parameter changed), and rendered
+the team's ink-3d prediction on the raw fit (A) and on the snap (Cm) on the same 71.5 M pixels. The render emulates
+`spiral-fitting/render_ink.py` (scale 0.25, 5 slices, max, /p95). We then ran the team's own `get_ink_metrics.py`
+(scrollprize/ink-coverage-32um, unchanged). Band: z 9984-11520, the middle 1536 slices of the fit, chosen by rule.
+The bars were written before any Paris 4 data was downloaded ([`results/paris4/PREREG_P4.md`](results/paris4/PREREG_P4.md)).
+
+| paired pixels | A (gen-19) | Cm (snap) | bar | verdict |
+|---|---|---|---|---|
+| predicted ink area | 35.86 cm² | **43.04 cm²** (×1.20) | ≥ ×1.15 | pass |
+| line score | 0.419 | 0.413 | ≥ A − 0.05 | pass |
+| column score (reported only) | 0.092 | 0.128 | | |
+
+- **The gain is not uniform.** Of the 30 strip slices with ink, the snap has more ink in 19 and less in 11
+  (`results/paris4/slice_table.tsv`).
+- **The crop below is fixed by rule** (the 8192-px slice where A has the most ink), not picked. The same letters are
+  visible in both arms; in the snap the strokes are fuller.
+- **Limits.** This is one band of one scroll. Our CPU sampler stands in for `vc_render_tifxyz` (it hangs on Windows,
+  villa #2562). The metric counts predicted ink area, not legibility. Running the metric needed one local fix to
+  nnU-Net's trainer lookup (`results/paris4/get_ink_metrics_fix.diff`); the model and the metric are unchanged.
+
+![Paris 4, fixed crop: raw gen-19 fit (top) and snap (bottom), ink-3d rendered on the same pixels](figures/paris4_ink_crop_detail.jpg)
+
+Full crop: `figures/paris4_ink_crop.jpg`; with the ink model's mask: `figures/paris4_ink_mask_crop.jpg`.
+Tools: `tools/p4_split_fit.py` (per-winding grids from `windings.tif`), `tools/render_ink_pair.py`, `tools/p4_crop.py`.
 
 ## What is not solved
 

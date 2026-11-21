@@ -1,0 +1,28 @@
+Fetching 7 files:   0%|          | 0/7 [00:00<?, ?it/s]Fetching 7 files: 100%|##########| 7/7 [00:00<00:00, 8162.39it/s]
+ink_dir : C:\VesuviusTemp\p4\render\A\ink
+strip   : w010-135_flat  (18 tile(s) concatenated)
+model   : scrollprize/ink-coverage-32um (C:\Users\PC\.cache\huggingface\hub\models--scrollprize--ink-coverage-32um\snapshots\d79c5860674fddd53370a59ee92f229c9b9de88c)
+folds   : [0, 1, 2]   gpus: ['0']   checkpoint: checkpoint_final.pth
+output  : C:\VesuviusTemp\p4\render\A\metric
+  launching fold 0 on GPU 0 -> pred_fold_0
+  launching fold 1 on GPU 0 -> pred_fold_1
+  launching fold 2 on GPU 0 -> pred_fold_2
+  fold 0 (GPU 0) ok
+  fold 1 (GPU 0) ok
+  fold 2 (GPU 0) ok
+prediction done in 965.2s
+  w010-135_flat  284,351x881 ink=2,431,652px  (0.97%)  lines=0.42@169px  cols=0.09 (171 x ~226px)
+
+================================================================
+INK METRICS
+================================================================
+strip                  : w010-135_flat
+TOTAL ink foreground   : 2,431,652 px   (metric; higher = more ink)
+total strip area       : 250,513,231 px
+overall ink fraction   : 0.971 %
+overall line-ness      : 0.419   (1 = all line pitches in 80-120 px band)
+overall column-ness    : 0.092   (1 = clean columns of ~850 px +/- 15%)
+TOTAL ink area         : 35.856 cm^2
+predictions            : C:\VesuviusTemp\p4\render\A\metric\predictions
+metrics                : C:\VesuviusTemp\p4\render\A\metric\metrics.json
+report                 : C:\VesuviusTemp\p4\render\A\metric\report.html

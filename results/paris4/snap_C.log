@@ -1,0 +1,20 @@
+126 windings, mode consistent
+pass 1 slice 1/384 z 9984: 14 s
+pass 1 slice 51/384 z 10184: 37 s
+pass 1 slice 101/384 z 10384: 95 s
+pass 1 slice 151/384 z 10584: 170 s
+pass 1 slice 201/384 z 10784: 245 s
+pass 1 slice 251/384 z 10984: 307 s
+pass 1 slice 301/384 z 11184: 388 s
+pass 1 slice 351/384 z 11384: 469 s
+pass 2 slice 1/384 z 9984: 602 s
+pass 2 slice 51/384 z 10184: 672 s
+pass 2 slice 101/384 z 10384: 758 s
+pass 2 slice 151/384 z 10584: 843 s
+pass 2 slice 201/384 z 10784: 927 s
+pass 2 slice 251/384 z 10984: 993 s
+pass 2 slice 301/384 z 11184: 1080 s
+pass 2 slice 351/384 z 11384: 1167 s
+pass 1 {'rays': 786432, 'hits': 93097633, 'matched': 71343493, 'sheets': 95272321, 'fold_hits': 240005} 
+pass 2 {'rays': 786432, 'hits': 93097633, 'matched': 71392632, 'sheets': 95272321, 'fold_hits': 240005}
+DONE {"nodes": 30532024, "in_z": 20327921, "matched": 14801408, "smoothed": 4197588, "unmoved": 1328925} 1242 s
